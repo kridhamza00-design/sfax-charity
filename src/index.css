@@ -72,6 +72,22 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Keep fixed mobile donation controls from covering page content. */
+@media (max-width: 1023px) {
+  body {
+    padding-bottom: 72px;
+  }
+}
+
+button, a, input, select, textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+:focus-visible {
+  outline: 3px solid #E98300;
+  outline-offset: 3px;
+}
+
 ::-webkit-scrollbar {
   width: 8px;
 }
