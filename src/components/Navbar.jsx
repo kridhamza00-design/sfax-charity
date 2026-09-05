@@ -44,11 +44,12 @@ export default function Navbar({ onOpenDonateModal }) {
           </Link>
 
           {/* Navigation Links - Center in RTL */}
-          <nav className="hidden lg:flex items-center gap-1">
+          <nav aria-label="التنقّل الرئيسي" className="hidden lg:flex items-center gap-1">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
+                aria-current={isActive(link.path) ? 'page' : undefined}
                 className={`px-4 py-2 rounded-full text-[15px] font-medium transition-all text-shadow-hero ${
                   isActive(link.path)
                     ? 'bg-secondary/40 text-primary font-bold shadow-sm'
@@ -84,12 +85,13 @@ export default function Navbar({ onOpenDonateModal }) {
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-primary/95 backdrop-blur-xl border-t border-white/10 px-4 py-6 space-y-3 animate-in fade-in-0 duration-200">
+        <nav aria-label="التنقّل على الهاتف" className="lg:hidden bg-primary/95 backdrop-blur-xl border-t border-white/10 px-4 py-6 space-y-3 animate-in fade-in-0 duration-200">
           {navLinks.map((link) => (
             <Link
               key={link.path}
-              to={link.path}
-              onClick={() => setMobileMenuOpen(false)}
+                to={link.path}
+                onClick={() => setMobileMenuOpen(false)}
+                aria-current={isActive(link.path) ? 'page' : undefined}
               className={`block px-4 py-3 rounded-2xl text-base font-heading font-medium transition-all ${
                 isActive(link.path)
                   ? 'bg-secondary/30 text-secondary font-bold'
@@ -110,7 +112,7 @@ export default function Navbar({ onOpenDonateModal }) {
             <Heart className="w-5 h-5 fill-current" />
             <span>تبرّع الآن</span>
           </button>
-        </div>
+        </nav>
       )}
     </header>
   );

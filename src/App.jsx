@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { lazy, Suspense, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 
 // Layout Components
@@ -9,31 +9,41 @@ import MobileBottomBar from './components/MobileBottomBar';
 import DonationModal from './components/DonationModal';
 
 // Pages
-import HomePageCloned from './pages/HomePageCloned';
-import Donate from './pages/Donate';
-import Initiatives from './pages/Initiatives';
-import Initiatives01 from './pages/Initiatives01';
-import Initiatives02 from './pages/Initiatives02';
-import Initiatives03 from './pages/Initiatives03';
-import Initiatives04 from './pages/Initiatives04';
-import Initiatives05 from './pages/Initiatives05';
-import Initiatives06 from './pages/Initiatives06';
-import Initiatives07 from './pages/Initiatives07';
-import Initiatives08 from './pages/Initiatives08';
-import Initiatives09 from './pages/Initiatives09';
-import Initiatives10 from './pages/Initiatives10';
-import Campaigns from './pages/Campaigns';
-import Orphan from './pages/Orphan';
-import About from './pages/About';
-import AboutAssociation from './pages/AboutAssociation';
-import AboutTransparency from './pages/AboutTransparency';
-import AboutCases from './pages/AboutCases';
-import Volunteer from './pages/Volunteer';
+const HomePageCloned = lazy(() => import('./pages/HomePageCloned'));
+const Donate = lazy(() => import('./pages/Donate'));
+const Initiatives = lazy(() => import('./pages/Initiatives'));
+const Initiatives01 = lazy(() => import('./pages/Initiatives01'));
+const Initiatives02 = lazy(() => import('./pages/Initiatives02'));
+const Initiatives03 = lazy(() => import('./pages/Initiatives03'));
+const Initiatives04 = lazy(() => import('./pages/Initiatives04'));
+const Initiatives05 = lazy(() => import('./pages/Initiatives05'));
+const Initiatives06 = lazy(() => import('./pages/Initiatives06'));
+const Initiatives07 = lazy(() => import('./pages/Initiatives07'));
+const Initiatives08 = lazy(() => import('./pages/Initiatives08'));
+const Initiatives09 = lazy(() => import('./pages/Initiatives09'));
+const Initiatives10 = lazy(() => import('./pages/Initiatives10'));
+const Campaigns = lazy(() => import('./pages/Campaigns'));
+const Orphan = lazy(() => import('./pages/Orphan'));
+const About = lazy(() => import('./pages/About'));
+const AboutAssociation = lazy(() => import('./pages/AboutAssociation'));
+const AboutTransparency = lazy(() => import('./pages/AboutTransparency'));
+const AboutCases = lazy(() => import('./pages/AboutCases'));
+const Volunteer = lazy(() => import('./pages/Volunteer'));
 
 function ScrollToTop() {
   const { pathname } = useLocation();
   useEffect(() => {
     window.scrollTo(0, 0);
+    const titles = {
+      '/': 'خيرية صفاقس | عطاء يصنع الفرق',
+      '/donate': 'التبرع | خيرية صفاقس',
+      '/initiatives': 'مبادراتنا | خيرية صفاقس',
+      '/campaigns': 'حملاتنا | خيرية صفاقس',
+      '/orphan': 'كفالة الأيتام | خيرية صفاقس',
+      '/about': 'عن خيرية صفاقس',
+      '/volunteer': 'التطوع | خيرية صفاقس',
+    };
+    document.title = titles[pathname] || 'خيرية صفاقس | عطاء يصنع الفرق';
   }, [pathname]);
   return null;
 }
@@ -54,7 +64,8 @@ export default function App() {
         <TopBar />
         <Navbar onOpenDonateModal={() => handleOpenDonateModal('صدقة عامة')} />
 
-        <main className="flex-1 flex flex-col">
+        <main id="main-content" tabIndex="-1" className="flex flex-1 flex-col outline-none">
+          <Suspense fallback={<div className="flex min-h-[40vh] items-center justify-center px-4 text-center text-muted-foreground" role="status">جارٍ تحميل الصفحة…</div>}>
           <Routes>
             <Route path="/" element={<HomePageCloned onOpenDonateModal={() => handleOpenDonateModal('صدقة عامة')} />} />
             <Route path="/donate" element={<Donate onOpenDonateModal={() => handleOpenDonateModal('صدقة عامة')} />} />
@@ -91,6 +102,7 @@ export default function App() {
 
             <Route path="*" element={<HomePageCloned onOpenDonateModal={() => handleOpenDonateModal('صدقة عامة')} />} />
           </Routes>
+          </Suspense>
         </main>
 
         <Footer />
