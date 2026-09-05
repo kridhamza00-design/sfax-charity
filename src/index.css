@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 40 33% 98%;
+    --foreground: 66 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 66 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 66 47% 11%;
+    --primary: 66 36% 27%;
+    --primary-foreground: 60 33% 92%;
+    --secondary: 60 47% 74%;
+    --secondary-foreground: 66 47% 11%;
+    --muted: 60 33% 95%;
+    --muted-foreground: 66 20% 38%;
+    --accent: 33 100% 42%;
+    --accent-foreground: 40 33% 98%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 60 25% 88%;
+    --input: 60 25% 88%;
+    --ring: 66 36% 27%;
+    --radius: .5rem;
+    --font-heading: "IBM Plex Sans Arabic", ui-sans-serif, system-ui, sans-serif;
+    --font-body: "Readex Pro", ui-sans-serif, system-ui, sans-serif;
+    --font-display: "IBM Plex Sans Arabic", ui-sans-serif, system-ui, sans-serif;
+  }
+
+  body {
+    @apply bg-background text-primary font-body overflow-x-hidden;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    direction: rtl;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+  }
+}
+
+/* Custom Utilities from Original Site */
+.text-shadow-hero {
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.55), 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+.glow-amber {
+  box-shadow: 0 0 #d97b0080;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.glow-amber:hover {
+  box-shadow: 0 8px 32px -4px #d97b008c;
+  transform: scale(1.03);
+}
+
+.progress-gradient {
+  background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent)));
+}
+
+@keyframes pulse-subtle {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(1.02); }
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 3s infinite ease-in-out;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #FAF8F5;
+}
+::-webkit-scrollbar-thumb {
+  background: #1B3629;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #E98300;
+}
